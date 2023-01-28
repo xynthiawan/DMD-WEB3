@@ -37,7 +37,7 @@ function pickWinner(userPlay, computerPlay) {
         console.log(`You lose! Computer score is ${computerWins}`);
       }
       break;
-    case "scissors":
+    case "scissors": 
       if (computerPlay === "paper") {
         userWins++;
         console.log(`You win! Your score is ${userWins}`);//template literals, you need to use backticks (`)
