@@ -1,64 +1,54 @@
-let userWins = 0;
 let computerWins = 0;
-//Here I have added two variables userWins and computerWins 
-//initialized with 0 to keep the track of wins. 
-
-
+let userWins = 0;
 function pickWinner(userPlay, computerPlay) {
-  // check for valid input
-  if (!["rock", "paper", "scissors"].includes(userPlay)) {
-    console.error("Invalid user play. Please enter 'rock', 'paper', or 'scissors'.");
-    return;
-  }
-  if (!["rock", "paper", "scissors"].includes(computerPlay)) {
-    console.error("Invalid computer play. Please enter 'rock', 'paper', or 'scissors'.");
-    return;
-  }
+  // Check if userPlay is a valid move
 
-  // check for a tie
+  if (userPlay !== "rock" && userPlay !== "paper" && userPlay !== "scissors") {
+    console.log("Invalid user play. Please enter 'rock', 'paper', or 'scissors'.");
+    return;
+  }
+  // Check if computerPlay is a valid move
+  if (computerPlay !== "rock" && computerPlay !== "paper" && computerPlay !== "scissors") {
+    console.log("Invalid computer play. Please enter 'rock', 'paper', or 'scissors'.");
+    return;
+  }
+  // Check for tie
   if (userPlay === computerPlay) {
     console.log("It's a tie!");
     return;
   }
-
-  // check for a win
+  // Check for user win
   switch (userPlay) {
     case "rock":
       if (computerPlay === "scissors") {
-        console.log("You win!");
         userWins++;
+        console.log(`You win! Your score is ${userWins}`);//template literals, you need to use backticks (`)
       } else {
-        console.log("You lose!");
-        computerWins++; //increase count of wins for computers
+        computerWins++;
+        console.log(`You lose! Computer score is ${computerWins}`);
       }
       break;
     case "paper":
       if (computerPlay === "rock") {
-        console.log("You win!");
         userWins++;
+        console.log(`You win! Your score is ${userWins}`);//template literals, you need to use backticks (`)
       } else {
-        console.log("You lose!");
-        computerWins++;//increase count of wins for players
+        computerWins++;
+        console.log(`You lose! Computer score is ${computerWins}`);
       }
       break;
     case "scissors":
       if (computerPlay === "paper") {
-        console.log("You win!");
         userWins++;
+        console.log(`You win! Your score is ${userWins}`);//template literals, you need to use backticks (`)
       } else {
-        console.log("You lose!");
         computerWins++;
+        console.log(`You lose! Computer score is ${computerWins}`);
       }
-      break;
   }
 }
 
-while (true) {
-  let userPlay = prompt("Enter rock, paper, or scissors:");
-  let computerPlay = Math.random() < 0.33 ? "rock" : Math.random() < 0.66 ? "paper" : "scissors";
-  console.log("You played " + userPlay + " and the computer played " + computerPlay + ".");
-  pickWinner(userPlay, computerPlay);
-  console.log("User wins: " + userWins + " Computer wins: " + computerWins);
-}
-
-  
+let userPlay = prompt("Enter rock, paper, or scissors:");
+let computerPlay = Math.random() < 0.33 ? "rock" : Math.random() < 0.66 ? "paper" : "scissors";
+console.log("You played " + userPlay + " and the computer played " + computerPlay + ".");
+pickWinner(userPlay, computerPlay);
