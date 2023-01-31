@@ -64,6 +64,7 @@ while (true) {
         break;
     }
     let computerPlay = Math.random() < 0.5 ? "rock" : Math.random() < 0.75 ? "paper" : "scissors";
+    //probability that the random generated thing would be 50% a rock. 
     pickWinner(userPlay, computerPlay);
 }
 // provide prompt

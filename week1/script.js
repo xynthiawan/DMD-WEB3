@@ -16,6 +16,17 @@ function pickWinner(userPlay, computerPlay) {
 
     // Check for winning conditions
     switch(userPlay) {
+
+        //case " ";
+        //if 
+        //else if
+        //break;
+
+        //case#2
+        //if 
+        //else if
+        //break;
+        
         case "rock":
             if (computerPlay === "scissors") {
                 console.log("You win! Rock beats scissors.");
