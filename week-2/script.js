@@ -25,11 +25,12 @@ class Person {
     data.forEach(person => {
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td>${person.name}</td>
-        <td>${person.title}</td>
-        <td>${person.email}</td>
+        <td>${person.firstname}</td>
+        <td>${person.lastname}</td>
         <td>${person.phone}</td>
+        <td>${person.title}</td>
         <td>${person.birthdate}</td>
+        <td>${person.email}</td>
       `;
       directory.appendChild(tr);
     });
@@ -38,13 +39,21 @@ class Person {
   fetch("https://uconndxlab.github.io/json-phonebook-example/dxlab-staff.json")
     .then(response => response.json())
     .then(data => {
-      const people = data.map(person => new Person(
-        person.name,
-        person.title,
-        person.email,
-        person.phone,
-        person.birthdate
-      ));
+        const people = Array.isArray(data) ? data.map(person => new Person(
+            person.firstname,
+            person.lastname,
+            person.phone,
+            person.title,
+            person.birthdate,
+            person.email
+          )) : [new Person(
+            person.firstname,
+            person.lastname,
+            person.phone,
+            person.title,
+            person.birthdate,
+            person.email
+          )];
       displayDirectory(people);
     })
     .catch(error => console.error(error));
@@ -52,4 +61,4 @@ class Person {
 
 //Create a "Person" class in your javascript, which is properly instantiated and multiple times in concert with your request to my JSON file.
 
-//console.log(JSON.parse());
+//console.log(JSON.parse());wha
