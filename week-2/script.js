@@ -5,13 +5,49 @@
 //Use Javascript Fetch to retrieve the data.
 //Create a "Person" class in your javascript, which is properly instantiated and multiple times in concert with your request to my JSON file.
 
+fetch("https://uconndxlab.github.io/json-phonebook-example/dxlab-staff.json")
+.then(response => response.json())
+.then(data => {
+   /* const contact = Array.isArray(data) ? data.map(contact => new Person(
+        contact.firstname,
+        contact.lastname,
+        contact.phone,
+        contact.title,
+        contact.birthdate,
+        contact.email
+      )) : [new Person(
+        contact.firstname,
+        contact.lastname,
+        contact.phone,
+        contact.title,
+        contact.birthdate,
+        contact.email
+
+        */
+
+        let contact = Array.isArray(data) ? data : [data];
+        contact = contact.map(contact => new Person(
+          contact.firstname,
+          contact.lastname,
+          contact.phone,
+          contact.title,
+          contact.birthdate,
+          contact.email
+      ));
+  displayDirectory(contact);
+})
+.catch(error => console.error(error));
+
+
+
 class Person {
-    constructor(name, title, email, phone, birthdate) {
-      this.name = name;
-      this.title = title;
-      this.email = email;
+    constructor(firstname, lastname, phone, title, birthdate, email) {
+      this.firstname = firstname;
+      this.lastname = lastname;
       this.phone = phone;
+      this.title = title;
       this.birthdate = birthdate;
+      this.email = email;
     }
   }
   
@@ -22,41 +58,21 @@ class Person {
       const nameB = b.name.split(" ")[1];
       return nameA.localeCompare(nameB);
     });
-    data.forEach(person => {
+    data.forEach(contacts => {
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td>${person.firstname}</td>
-        <td>${person.lastname}</td>
-        <td>${person.phone}</td>
-        <td>${person.title}</td>
-        <td>${person.birthdate}</td>
-        <td>${person.email}</td>
+        <td>${contacts.firstname}</td>
+        <td>${contacts.lastname}</td>
+        <td>${contacts.phone}</td>
+        <td>${contacts.title}</td>
+        <td>${contacts.birthdate}</td>
+        <td>${contacts.email}</td>
       `;
       directory.appendChild(tr);
     });
   };
   
-  fetch("https://uconndxlab.github.io/json-phonebook-example/dxlab-staff.json")
-    .then(response => response.json())
-    .then(data => {
-        const people = Array.isArray(data) ? data.map(person => new Person(
-            person.firstname,
-            person.lastname,
-            person.phone,
-            person.title,
-            person.birthdate,
-            person.email
-          )) : [new Person(
-            person.firstname,
-            person.lastname,
-            person.phone,
-            person.title,
-            person.birthdate,
-            person.email
-          )];
-      displayDirectory(people);
-    })
-    .catch(error => console.error(error));
+
   
 
 //Create a "Person" class in your javascript, which is properly instantiated and multiple times in concert with your request to my JSON file.
