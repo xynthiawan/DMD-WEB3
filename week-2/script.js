@@ -1,35 +1,55 @@
 //The hosted JSON should serve as your data source. Do not duplicate that file anywhere on your file system or in your repo.
-
-
-
-
-
 //List each person on the page including their name, title, email address, phone number, and birthdate. Make it look decent with CSS.
 //Everything should validate.
 //SORT AND DISPLAY THE DIRECTORY BY LAST NAME
-
-/*
-
-
-console.log(`this is some codes `);
-*/
-
 //Use Javascript Fetch to retrieve the data.
+//Create a "Person" class in your javascript, which is properly instantiated and multiple times in concert with your request to my JSON file.
 
-fetch('https://uconndxlab.github.io/json-phonebook-example/dxlab-staff.json', {
-    method: 'GET',
-    headers: {
-        'Accept': 'application/json',
-    },
-})
-.then(response => response.json()) // read the json
-.then(response => console.log(JSON.stringify(response)))
-
-
+class Person {
+    constructor(name, title, email, phone, birthdate) {
+      this.name = name;
+      this.title = title;
+      this.email = email;
+      this.phone = phone;
+      this.birthdate = birthdate;
+    }
+  }
+  
+  const displayDirectory = data => {
+    const directory = document.getElementById("directoryBody");
+    data.sort((a, b) => {
+      const nameA = a.name.split(" ")[1];
+      const nameB = b.name.split(" ")[1];
+      return nameA.localeCompare(nameB);
+    });
+    data.forEach(person => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${person.name}</td>
+        <td>${person.title}</td>
+        <td>${person.email}</td>
+        <td>${person.phone}</td>
+        <td>${person.birthdate}</td>
+      `;
+      directory.appendChild(tr);
+    });
+  };
+  
+  fetch("https://uconndxlab.github.io/json-phonebook-example/dxlab-staff.json")
+    .then(response => response.json())
+    .then(data => {
+      const people = data.map(person => new Person(
+        person.name,
+        person.title,
+        person.email,
+        person.phone,
+        person.birthdate
+      ));
+      displayDirectory(people);
+    })
+    .catch(error => console.error(error));
+  
 
 //Create a "Person" class in your javascript, which is properly instantiated and multiple times in concert with your request to my JSON file.
-class person {
-// convert all the read in content into each individual class items
-// read in data and manage it vertically
-    
-} ;
+
+//console.log(JSON.parse());
