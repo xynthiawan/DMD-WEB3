@@ -1,15 +1,18 @@
 
 let playerScore = 0;
 let computerScore = 0;
-let userPlay = "rock";
-let computerPlay = 0.1;
-let question;
+let userPlay = " ";
+let computerPlay = " ";
+let choices;
+
 
 function pickWinner(userPlay, computerPlay) {
     // Check if userPlay is valid
    userPlay= prompt("Enter 'rock', 'paper', 'scissors'");
-   computerPlay = Math.random() < 0.5 ? "rock" : Math.random() < 0.75 ? "paper" : "scissors";
-   
+   choices = ["rock", "paper", "scissors"];
+   computerPlay = choices[Math.floor(Math.random() * 3)];
+   // generate a radom number between 0 and 3
+   //turnary function looking at fractions use whole number
     if (userPlay !== "rock" && userPlay !== "paper" && userPlay !== "scissors" && userPlay !== "score") {
         console.log("Invalid user play. Please enter 'rock', 'paper', or 'scissors'.");
         return;
