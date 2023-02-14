@@ -8,40 +8,50 @@
 fetch("https://uconndxlab.github.io/json-phonebook-example/dxlab-staff.json")
 .then(response => response.json())
 .then(data => {
-   /* const contact = Array.isArray(data) ? data.map(contact => new Person(
+console.log(data);
+//let { contacts } = data;
+
+      //let contact = Array.isArray(data) ? data : [data];
+
+      //contacts = contacts.map(contact => new Person(
+      //contact.firstname,
+      //contact.lastname,
+      //contact.phone,
+      //contact.title,
+      //contact.birthdate,
+      //contact.email
+      //));
+       
+        
+      let { contacts } = data;
+        
+       contacts.forEach(contact => { 
+       console.log(contact.firstname, contact.lastname, contact.phone);
+       });
+
+       contacts = contacts.map(contact => new Person ( 
         contact.firstname,
         contact.lastname,
         contact.phone,
         contact.title,
         contact.birthdate,
         contact.email
-      )) : [new Person(
-        contact.firstname,
-        contact.lastname,
-        contact.phone,
-        contact.title,
-        contact.birthdate,
-        contact.email
+       ));
+        
+        
 
-        */
-
-        let contact = Array.isArray(data) ? data : [data];
-        contact = contact.map(contact => new Person(
-          contact.firstname,
-          contact.lastname,
-          contact.phone,
-          contact.title,
-          contact.birthdate,
-          contact.email
-      ));
-  displayDirectory(contact);
+       
+      
+    
+  displayDirectory(contacts);//erroring these contacts represent array of persons
 })
 .catch(error => console.error(error));
 
 
 
-class Person {
+  class Person {
     constructor(firstname, lastname, phone, title, birthdate, email) {
+      
       this.firstname = firstname;
       this.lastname = lastname;
       this.phone = phone;
@@ -50,14 +60,15 @@ class Person {
       this.email = email;
     }
   }
-  
-  const displayDirectory = data => {
-    const directory = document.getElementById("directoryBody");
-    data.sort((a, b) => {
-      const nameA = a.name.split(" ")[1];
-      const nameB = b.name.split(" ")[1];
-      return nameA.localeCompare(nameB);
-    });
+
+ const displayDirectory = data => {
+  //  const directory = document.getElementById("directoryBody");
+   // data.sort((a, b) => {
+    //  const nameA = a.name.split(" ")[1];
+    //  const nameB = b.name.split(" ")[1];
+     // return nameA.localeCompare(nameB);
+
+    
     data.forEach(contacts => {
       const tr = document.createElement("tr");
       tr.innerHTML = `
