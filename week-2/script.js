@@ -8,42 +8,29 @@
 fetch("https://uconndxlab.github.io/json-phonebook-example/dxlab-staff.json")
 .then(response => response.json())
 .then(data => {
-console.log(data);
-//let { contacts } = data;
 
-      //let contact = Array.isArray(data) ? data : [data];
+    console.log(data);
+    let { contacts } = data;
 
-      //contacts = contacts.map(contact => new Person(
-      //contact.firstname,
-      //contact.lastname,
-      //contact.phone,
-      //contact.title,
-      //contact.birthdate,
-      //contact.email
-      //));
-       
-        
-      let { contacts } = data;
-        
-       contacts.forEach(contact => { 
-       console.log(contact.firstname, contact.lastname, contact.phone);
-       });
+    contacts.forEach(contact =>{ 
+    // for each objects or each position allow the console return the name to check validity
+        console.log (contact.firstname, contact.lastname, contact.phone);
+    }); 
 
-       contacts = contacts.map(contact => new Person ( 
+    contacts = contacts.map(contact => new Person (
+
         contact.firstname,
         contact.lastname,
         contact.phone,
         contact.title,
         contact.birthdate,
         contact.email
-       ));
-        
-        
 
-       
-      
+    ));
     
-  displayDirectory(contacts);//erroring these contacts represent array of persons
+  displayDirectory(contacts);
+  // contacts means the array object name so I want to display it
+
 })
 .catch(error => console.error(error));
 
@@ -61,14 +48,15 @@ console.log(data);
     }
   }
 
- const displayDirectory = data => {
-  //  const directory = document.getElementById("directoryBody");
-   // data.sort((a, b) => {
-    //  const nameA = a.name.split(" ")[1];
-    //  const nameB = b.name.split(" ")[1];
-     // return nameA.localeCompare(nameB);
+  
+  const displayDirectory = data => {
+   // const directory = document.getElementById("directoryBody");
+    //data.sort((a, b) => {
+      //const nameA = a.name.split(" ")[1];
+      //const nameB = b.name.split(" ")[1];
+      //return nameA.localeCompare(nameB);
+    //});
 
-    
     data.forEach(contacts => {
       const tr = document.createElement("tr");
       tr.innerHTML = `
