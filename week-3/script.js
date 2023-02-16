@@ -98,11 +98,6 @@ fetch("https://uconndxlab.github.io/json-phonebook-example/dxlab-staff.json")
     contacts = contacts.map(contact => new Person (
 
         contact.firstname,
-        contact.lastname,
-        contact.phone,
-        contact.title,
-        contact.birthdate,
-        contact.email
 
     ));
     
@@ -115,14 +110,10 @@ fetch("https://uconndxlab.github.io/json-phonebook-example/dxlab-staff.json")
 
 
   class Person {
-    constructor(firstname, lastname, phone, title, birthdate, email) {
+    constructor(firstname) {
       
       this.firstname = firstname;
-      this.lastname = lastname;
-      this.phone = phone;
-      this.title = title;
-      this.birthdate = birthdate;
-      this.email = email;
+   
     }
   }
 
@@ -132,7 +123,7 @@ fetch("https://uconndxlab.github.io/json-phonebook-example/dxlab-staff.json")
     data.forEach(contacts => {
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td>${contacts.firstname}</td>
+        <td>the randomized opponent is ${randomFirstName}</td>
       `;
       directory.appendChild(tr);
       // Select a random index from the "contacts" array
