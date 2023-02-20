@@ -1,85 +1,40 @@
 
-let playerScore = 0;
-let computerScore = 0;
-let userPlay = " ";
-let computerPlay = " ";
-let choices;
-let length;
-let randomFirstName ="";
-let randomIndex =''; 
+let score = { player: 0, computer: 0, ties: 0 };
 
-function pickWinner(userPlay, computerPlay) {
-    // Check if userPlay is valid
-   userPlay= prompt("Enter 'rock', 'paper', 'scissors'");
-   choices = ["rock", "paper", "scissors"];
-   computerPlay = choices[Math.floor(Math.random() * 3)];
-   // generate a radom number between 0 and 3
-   //turnary function looking at fractions use whole number
-    if (userPlay !== "rock" && userPlay !== "paper" && userPlay !== "scissors" && userPlay !== "score") {
-        console.log("Invalid user play. Please enter 'rock', 'paper', or 'scissors'.");
-        return;
+function play() {
+  const moves = document.getElementsByName("move");
+  let playerMove;
+
+  // Find the move that the player selected
+  for (let i = 0; i < moves.length; i++) {
+    if (moves[i].checked) {
+      playerMove = moves[i].value;
+      break;
     }
-    // Check if computerPlay is valid
-    if (computerPlay !== "rock" && computerPlay !== "paper" && computerPlay !== "scissors") {
-        console.log("Invalid computer play. Please enter 'rock', 'paper', or 'scissors'.");
-        return;
-    }
+  }
 
-    // Check for winning conditions
-    switch(userPlay) {
-        case "rock":
-            if (computerPlay === "scissors") {
-                console.log("You win! Rock beats scissors.");
-                playerScore++;
-            } else if (computerPlay === "paper") {
-                console.log("You lose! Paper beats rock.");
-                computerScore++;
-            } else if (computerPlay === userPlay) {
-                console.log("It's a tie! You both chose rock.");
-            }
-            break;
-        case "paper":
-            if (computerPlay === "rock") {
-                console.log("You win! Paper beats rock.");
-                playerScore++;
-            } else if (computerPlay === "scissors") {
-                console.log("You lose! Scissors beat paper.");
-                computerScore++;
-            } else if (computerPlay === userPlay) {
-                console.log("It's a tie! You both chose paper.");
-            }
-            break;
-        case "scissors":
-            if (computerPlay === "paper") {
-                console.log("You win! Scissors beat paper.");
-                playerScore++;
-            } else if (computerPlay === "rock") {
-                console.log("You lose! Rock beats scissors.");
-                computerScore++;
-            } else if (computerPlay === userPlay) {
-                console.log("It's a tie! You both chose scissors.");
-            }
-            break;
-        case "score":
-            if (userPlay.toLowerCase()=== "score") {
-                console.log(`Thank you for playing! Your score vs computer is ${playerScore} vs ${computerScore}`);
-                //score
-                }
-            //console.log("Thank you for playing! Your score is: " + playerScore + ":" + computerScore);
-            break;
-            
-    }
+  // Generate a random move for the computer
+  const computerMove = ["rock", "paper", "scissors"][Math.floor(Math.random() * 3)];
 
-    console.log(`Your score vs computer is ${playerScore} vs ${computerScore}`);
-    
-    
-}
+  // Determine the winner
+  let result;
+  if (playerMove === computerMove) {
+    result = "It's a tie!";
+    score.ties++;
+  } else if (
+    (playerMove === "rock" && computerMove === "scissors") ||
+    (playerMove === "paper" && computerMove === "rock") ||
+    (playerMove === "scissors" && computerMove === "paper")
+  ) {
+    result = "You win!";
+    score.player++;
+  } else {
+    result = "You lose!";
+    score.computer++;
+  }
 
-// Play the game
-
-// provide prompt
-
-fetch("https://uconndxlab.github.io/json-phonebook-example/dxlab-staff.json")
+  
+ fetch("https://uconndxlab.github.io/json-phonebook-example/dxlab-staff.json")
 .then(response => response.json())
 .then(data => {
 
@@ -131,11 +86,10 @@ fetch("https://uconndxlab.github.io/json-phonebook-example/dxlab-staff.json")
     });
   };
 
-
-
-// Get the first name from the selected contact
-
-
-// Display the random first name on the page
-      
-document.getElementById("opponent-name").innerHTML = randomFirstName;
+  
+  // Display the result and score
+  const resultElement = document.getElementById("result");
+  resultElement.textContent = `You played ${playerMove}, the computer played ${computerMove}. ${result}`;
+  const scoreElement = document.getElementById("score");
+  scoreElement.textContent = `Player: ${score.player}, Computer: ${score.computer}, Ties: ${score.ties}`;
+}
