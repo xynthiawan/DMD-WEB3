@@ -1,6 +1,8 @@
 
 let score = { player: 0, computer: 0, ties: 0 };
-
+let length ="";
+let randomIndex ="";
+let randomFirstName ="";
 function play() {
   const moves = document.getElementsByName("move");
   let playerMove;
@@ -37,26 +39,20 @@ function play() {
  fetch("https://uconndxlab.github.io/json-phonebook-example/dxlab-staff.json")
 .then(response => response.json())
 .then(data => {
-
-    console.log(data);
     let { contacts } = data;
-
-    contacts.forEach(contact =>{ 
     // for each objects or each position allow the console return the name to check validity
         //console.log (contact.firstname);
       length= data.contacts.length;
       randomIndex = Math.floor(Math.random() * length);
       randomFirstName= contacts[randomIndex].firstname;
       console.log(randomFirstName);
-    }); 
 
     contacts = contacts.map(contact => new Person (
 
         contact.firstname,
 
     ));
-    
-  displayDirectory(contacts);
+  
   // contacts means the array object name so I want to display it
 
 })
@@ -73,23 +69,9 @@ function play() {
   }
 
   
-  const displayDirectory = data => {
-
-    data.forEach(contacts => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td>the randomized opponent is ${randomFirstName}</td>
-      `;
-      directory.appendChild(tr);
-      // Select a random index from the "contacts" array
-
-    });
-  };
-
-  
   // Display the result and score
   const resultElement = document.getElementById("result");
-  resultElement.textContent = `You played ${playerMove}, the computer played ${computerMove}. ${result}`;
+  resultElement.textContent = `You played ${playerMove},${randomFirstName} played ${computerMove}. ${result}`;
   const scoreElement = document.getElementById("score");
-  scoreElement.textContent = `Player: ${score.player}, Computer: ${score.computer}, Ties: ${score.ties}`;
+  scoreElement.textContent = `Player: ${score.player}, ${randomFirstName}: ${score.computer}, Ties: ${score.ties}`;
 }
